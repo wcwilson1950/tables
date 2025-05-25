@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">		
+		.container {
+			width: 80%;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #f9f9f9;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			font-family:Arial, Helvetica, sans-serif;
+			font-size: 14px;
+			color: #333;}
+
+			#webformErrors {
+				display: none;
+				color: red;
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+			.table {
+				width: 50%;
+				border-collapse: collapse;
+			}
+			.table th, .table td {
+				border: 1px solid #ddd;
+				padding: 8px;
+			}
+			.table th {
+				background-color: #f2f2f2;
+				text-align: left;
+			}
+			.table-striped tbody tr:nth-of-type(odd) {
+				background-color: #f9f9f9;
+			}
+			.table-bordered th, .table-bordered td {
+				border: 1px solid #ddd;
+			}
+			.table-hover tbody tr:hover {
+				background-color: #f1f1f1;
+			}
+			#actionButtons {
+				margin-top: 20px;
+			}
+			#actionButtons button {
+				margin-right: 10px;
+				padding: 10px 20px;
+				background-color: #007bff;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			#actionButtons button:hover {
+				background-color: #0056b3;
+			}
+			#actionButtons button:disabled {
+				background-color: #ccc;
+				cursor: not-allowed;
+			}
+			#actionButtons button:disabled:hover {
+				background-color: #ccc;
+			}
+			#actionButtons button:active {
+				background-color: #0056b3;
+				transform: translateY(1px);
+			}
+			#actionButtons button:focus {
+				outline: none;
+				box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+			}
+			#actionButtons button:focus:not(:focus-visible) {
+				box-shadow: none;
+			}
+			#cancelEditsButton {
+				background-color: #dc3545 !important;
+			}
+			#cancelEditsButton:hover {
+				background-color: #c82333 !important;
+			}
+			#cancelEditsButton:active {
+				background-color: #bd2130 !important;
+				transform: translateY(1px) !important;
+			}
+			#cancelEditsButton:focus {
+				box-shadow: 0 0 5px rgba(220, 53, 69, 0.5) !important;
+			}
+		</style>
+			
+	</head>
+	<body>
+		<div class="container">
+			<h1>Items</h1>
+			<p>Manage your items here.</p>
+		<div id="webformErrors" name="errorContent"></div>
+		<table id="itemsTable" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Type</th>
+					<th data-edit="input" data-field="qty">Quantity</th>
+					<th>Min Level</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody id="itemsTableBody">
+				<tr data-key="1">
+					<td>1</td>
+					<td>Item A</td>
+					<td>Type 1</td>
+					<td>10</td>
+					<td>5</td>
+					<td>Active</td>
+				</tr>
+				<tr data-key="2">
+					<td>2</td>
+					<td>Item B</td>
+					<td>Type 2</td>
+					<td>20</td>
+					<td>10</td>
+					<td>Inactive</td>
+				</tr>
+				<tr data-key="3">
+					<td>3</td>
+					<td>Item C</td>
+					<td>Type 3</td>
+					<td>30</td>
+					<td>15</td>
+					<td>Active</td>
+				</tr>
+				<tr data-key="4">
+					<td>4</td>
+					<td>Item D</td>
+					<td>Type 4</td>
+					<td>40</td>
+					<td>20</td>
+					<td>Inactive</td>
+				</tr>
+				<tr data-key="5">
+					<td>5</td>
+					<td>Item E</td>
+					<td>Type 5</td>
+					<td>50</td>
+					<td>25</td>
+					<td>Active</td>
+				</tr>
+				<tr data-key="6">
+					<td>6</td>
+					<td>Item F</td>
+					<td>Type 6</td>
+					<td>60</td>
+					<td>30</td>
+					<td>Inactive</td>
+				</tr>
+				<tr data-key="7">
+					<td>7</td>
+					<td>Item G</td>
+					<td>Type 7</td>
+					<td>70</td>
+					<td>35</td>
+					<td>Active</td>
+				</tr>
+				<tr data-key="8">
+					<td>8</td>
+					<td>Item H</td>
+					<td>Type 8</td>
+					<td>80</td>
+					<td>40</td>
+					<td>Inactive</td>
+				</tr>
+				<tr data-key="9">
+					<td>9</td>
+					<td>Item I</td>
+					<td>Type 9</td>
+					<td>90</td>
+					<td>45</td>
+					<td>Active</td>
+				</tr>
+				<tr data-key="10">
+					<td>10</td>
+					<td>Item J</td>
+					<td>Type 10</td>
+					<td>100</td>
+					<td>50</td>
+					<td>Inactive</td>
+				</tr>
+				<tr data-key="11">
+					<td>11</td>
+					<td>Item K</td>
+					<td>Type 11</td>
+					<td>110</td>
+					<td>55</td>
+					<td>Active</td>
+				</tr>
+				<tr data-key="12">
+					<td>12</td>
+					<td>Item L</td>
+					<td>Type 12</td>
+					<td>120</td>
+					<td>60</td>
+					<td>Inactive</td>
+				</tr>
+				<tr data-key="13">
+					<td>13</td>
+					<td>Item M</td>
+					<td>Type 13</td>
+					<td>130</td>
+					<td>65</td>
+					<td>Active</td>
+				</tr>
+				<tr data-key="14">
+					<td>14</td>
+					<td>Item N</td>
+					<td>Type 14</td>
+					<td>140</td>
+					<td>70</td>
+					<td>Inactive</td>
+				</tr>
+				<tr data-key="15">
+					<td>15</td>
+					<td>Item O</td>
+					<td>Type 15</td>
+					<td>150</td>
+					<td>75</td>
+					<td>Active</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="actionButtons">
+			<button id="addItemButton">Add Item</button>
+			<button id="saveItemButton">Save</button>
+			<button id="cancelEditsButton">Cancel</button>
+			</div>
+		</div>
+		<script>
+		
+		// Pure function: get the index and field name of the editable column
+		const getEditableColInfo = ths =>
+			Array.from(ths).reduce(
+				(acc, th, idx) =>
+					th.getAttribute('data-edit') === 'input'
+						? { idx, field: th.dataset.field }
+						: acc,
+				{ idx: -1, field: '' }
+			);
+		
+		// Pure function: get the next row in tbody, wrapping to first if needed
+		const getNextRow = (currentRow, tbody) =>
+			currentRow.nextElementSibling || tbody.querySelector('tr:first-child');
+		
+		// Pure function: get the cell in the given row and column
+		const getCell = (row, colIdx) => row.children[colIdx];
+		
+		// Effect: replace cell content with input, set up event handlers
+		const editCellEffect = (cell, originalValue, onCommit, onCancel) => {
+			const input = document.createElement('input');
+			input.type = 'text';
+			input.value = originalValue;
+			cell.textContent = '';
+			cell.appendChild(input);
+			input.focus();
+			input.select();
+		
+			const cleanup = () => {
+				input.removeEventListener('keydown', keyHandler);
+				input.removeEventListener('blur', blurHandler);
+			};
+		
+			const keyHandler = ev => {
+				if (ev.key === 'Enter' || ev.key === 'Tab') {
+					ev.preventDefault();
+					onCommit(input.value, ev.key);
+					cleanup();
+				} else if (ev.key === 'Escape') {
+					onCancel();
+					cleanup();
+				}
+			};
+		
+			const blurHandler = () => {
+				onCancel();
+				cleanup();
+			};
+		
+			input.addEventListener('keydown', keyHandler);
+			input.addEventListener('blur', blurHandler, { once: true });
+		};
+		
+		// Pure function: create a custom event for cell update
+		const createCellUpdateEvent = (row, field, oldValue, newValue) =>
+			new CustomEvent('cellUpdate', {
+				bubbles: true,
+				detail: {
+					id: row.dataset.key,
+					field,
+					oldValue,
+					newValue
+				}
+			});
+		
+		// Effect: set up editable cells
+		const setupEditableCells = (tbody, editableCol, editFieldName) => {
+			Array.from(tbody.querySelectorAll('tr')).forEach(row => {
+				const cell = getCell(row, editableCol);
+				cell.style.cursor = 'pointer';
+				cell.addEventListener('click', function onCellClick() {
+					if (cell.querySelector('input')) return;
+					const originalValue = cell.textContent;
+		
+					editCellEffect(
+						cell,
+						originalValue,
+						(newValue, key) => {
+							cell.textContent = newValue;
+							cell.dispatchEvent(
+								createCellUpdateEvent(row, editFieldName, originalValue, newValue)
+							);
+							if (key === 'Tab') {
+								const nextCell = getCell(getNextRow(row, tbody), editableCol);
+								if (nextCell) nextCell.click();
+							}
+						},
+						() => {
+							cell.textContent = originalValue;
+						}
+					);
+				});
+			});
+		};
+		
+		// Effect: set up cell update logging
+		const setupCellUpdateLogging = tbody => {
+			tbody.addEventListener('cellUpdate', e => {
+				console.log('Cell updated:', e.detail);
+			});
+		};
+		
+		// Main effect: initialize everything on DOMContentLoaded
+		document.addEventListener('DOMContentLoaded', () => {
+			const ths = document.querySelectorAll('#itemsTable thead th');
+			const { idx: editableCol, field: editFieldName } = getEditableColInfo(ths);
+			if (editableCol === -1) return;
+			const tbody = document.getElementById('itemsTableBody');
+			setupEditableCells(tbody, editableCol, editFieldName);
+			setupCellUpdateLogging(tbody);
+		});
+	</script>
+	</body>
+</html>
